@@ -9,7 +9,7 @@
     "test": "jest",
     "test:e2e:build": "detox build",
     "test:e2e": "detox test",
-    "lint": "tslint src/**/*.ts{x}"
+    "lint": "tslint src/**/*.ts[x]"
   },
   "dependencies": {
     "react": "16.11.0",
@@ -34,6 +34,9 @@
     "typescript": "^3.9.3"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "testMatch": [
+      "**/__tests__/**/*.[jt]s?(x)"
+    ]
   }
 }
