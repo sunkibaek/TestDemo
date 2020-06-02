@@ -1,0 +1,14 @@
+{
+  "testRunner": "jest",
+  "runnerConfig": "e2e/config.json",
+  "configurations": {
+    "ios": {
+      "build": "xcodebuild -workspace ios/TestDemo.xcworkspace -scheme TestDemo -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+      "type": "ios.simulator",
+      "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/TestDemo.app",
+      "device": {
+        "type": "iPhone 11"
+      }
+    }
+  }
+}
