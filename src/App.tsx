@@ -10,6 +10,7 @@ import {
   Image,
 } from "react-native";
 import { Header, Colors } from "react-native/Libraries/NewAppScreen";
+import fetchImages from "./fetchImages";
 
 const App = () => {
   const [isHelloVisible, setIsHelloVisible] = useState(false);
@@ -27,17 +28,7 @@ const App = () => {
   };
 
   const fetchPhotos = async () => {
-    const response = await fetch(
-      "https://api.unsplash.com/search/photos?page=1&per_page=10&query=rocket",
-      {
-        headers: {
-          Authorization:
-            "Client-ID CQtp-_AdoIpAc06bqjrhIsPNLM-tbcwY7KgP-RLHW8g",
-        },
-      }
-    );
-
-    const result = await response.json();
+    const result = await fetchImages();
 
     setImages(result.results);
   };
