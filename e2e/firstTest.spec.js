@@ -16,4 +16,10 @@ describe("Example", () => {
     await element(by.id("world_button")).tap();
     await expect(element(by.text("World!!!"))).toBeVisible();
   });
+
+  it("should rocket images after tap", async () => {
+    await element(by.id("fetch_photos")).tap();
+    await expect(element(by.id("rocket_image-0"))).toBeVisible();
+    await expect(element(by.id("rocket_image-3"))).toBeVisible();
+  });
 });

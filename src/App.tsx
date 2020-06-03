@@ -7,12 +7,16 @@ import {
   Text,
   StatusBar,
   Button,
+  Image,
 } from "react-native";
 import { Header, Colors } from "react-native/Libraries/NewAppScreen";
 
 const App = () => {
   const [isHelloVisible, setIsHelloVisible] = useState(false);
   const [isWorldVisible, setIsWorldVisible] = useState(false);
+  const [images, setImages] = useState<
+    { id: string; urls: { regular: string } }[]
+  >([]);
 
   const onHelloButtonPress = () => {
     setIsHelloVisible(true);
@@ -20,6 +24,22 @@ const App = () => {
 
   const onWorldButtonPress = () => {
     setIsWorldVisible(true);
+  };
+
+  const fetchPhotos = async () => {
+    const response = await fetch(
+      "https://api.unsplash.com/search/photos?page=1&per_page=10&query=rocket",
+      {
+        headers: {
+          Authorization:
+            "Client-ID CQtp-_AdoIpAc06bqjrhIsPNLM-tbcwY7KgP-RLHW8g",
+        },
+      }
+    );
+
+    const result = await response.json();
+
+    setImages(result.results);
   };
 
   return (
@@ -50,6 +70,23 @@ const App = () => {
                 title="Show World"
               />
 
+              <Button
+                onPress={fetchPhotos}
+                testID="fetch_photos"
+                title="Fetch Photos"
+              />
+
+              <ScrollView>
+                {images.map((image, index) => (
+                  <Image
+                    testID={`rocket_image-${index}`}
+                    key={image.id}
+                    source={{ uri: image.urls.regular }}
+                    style={styles.image}
+                  />
+                ))}
+              </ScrollView>
+
               {isHelloVisible ? <Text>Hello!!!</Text> : null}
 
               {isWorldVisible ? <Text>World!!!</Text> : null}
@@ -62,6 +99,10 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  image: {
+    height: 100,
+    width: 100,
+  },
   scrollView: {
     backgroundColor: Colors.lighter,
   },
