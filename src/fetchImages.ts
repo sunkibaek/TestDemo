@@ -3,10 +3,12 @@ const fetchImages = async () => {
     "https://api.unsplash.com/search/photos?page=1&per_page=10&query=rocket",
     {
       headers: {
-        Authorization: "Client-ID CQtp-_AdoIpAc06bqjrhIsPNLM-tbcwY7KgP-RLHW8g",
+        Authorization: "Client-ID YOUR_ACCESS_TOKEN",
       },
     }
   );
+
+  console.log("Original function running ===");
 
   return await response.json();
 };
